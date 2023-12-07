@@ -8,11 +8,37 @@ ALLOWED_HOSTS = []
 
 DATABASES = {
     "default": {
-        "ENGINE": get_env_variable("DB_ENGINE"),
-        "NAME": get_env_variable("DB_NAME"),
-        "USER": get_env_variable("DB_USER"),
-        "PASSWORD": get_env_variable("DB_PASS"),
-        "HOST": get_env_variable("DB_HOST"),
-        "PORT": get_env_variable("DB_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+DB_ENGINE = get_env_variable("DB_ENGINE")
+DB_NAME = get_env_variable("DB_NAME")
+DB_USER = get_env_variable("DB_USER")
+DB_PASS = get_env_variable("DB_PASS")
+DB_HOST = get_env_variable("DB_HOST")
+DB_PORT = get_env_variable("DB_PORT")
+
+DB_IS_AVAIL = all(
+    [
+        DB_ENGINE,
+        DB_NAME,
+        DB_USER,
+        DB_PASS,
+        DB_HOST,
+        DB_PORT,
+    ]
+)
+
+if DB_IS_AVAIL:
+    DATABASES = {
+        "default": {
+            "ENGINE": DB_ENGINE,
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASS,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
+        }
+    }
