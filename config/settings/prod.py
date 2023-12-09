@@ -1,4 +1,6 @@
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from config.settings.base import *
 from config.settings.utils import get_env_variable
@@ -15,6 +17,21 @@ DATABASES = {
         conn_health_checks=True,
     )
 }
+
+sentry_sdk.init(
+    dsn=get_env_variable("SENTRY_DSN"),
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+    enable_tracing=True,
+    integrations=[
+        DjangoIntegration(
+            transaction_style="url",
+            middleware_spans=True,
+            signals_spans=True,
+            cache_spans=True,
+        ),
+    ],
+)
 
 # AWS S3 settings for static files storage and serving.
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
