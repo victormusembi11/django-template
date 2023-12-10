@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<h1 class="mb-5 mt-5">
+    Django Template
+</h1>
+
+<h2>Virtual environment setup</h2>
+<hr>
+
+<h4>Create virtual environment</h4>
+<pre>
+<code>python3 -m venv venv</code>
+</pre>
+
+<h4>Activate virtual environment</h4>
+<pre>
+<code>source venv/bin/activate</code>
+</pre>
+
+<h2>Environment variables setup</h2>
+<hr>
+
+<p>Create a <code>.env</code> file in the <strong>root directory</strong> and add the following variables in the .env.example file.</p>
+
+<h4>Note:</h4>
+<p>The default database is <strong>sqlite3</strong> on the local environment. If you want to use postgresql(or any other), then make sure you set the environment variables in the .env for the database as shown in the .env.example file so that the <strong>DB_IS_AVAIL</strong> variable in <strong>config.settings.local</strong> is set to <strong>True</strong>.</p>
+
+<h2>Install dependencies</h2>
+<hr>
+
+<pre>
+<code>pip install -r requirements.txt</code>
+</pre>
+
+<h2>Run migrations</h2>
+<hr>
+
+<pre>
+<code>python manage.py migrate</code>
+</pre>
+
+<h2>Run server</h2>
+<hr>
+
+<pre>
+<code>python manage.py runserver</code>
+</pre>
+
+<h2>Docker setup</h2>
+<hr>
+
+<h4>Note:</h4>
+<p>The default port for postgresql is <strong>5432</strong> but in the Docker setup, the port is <strong>5435</strong>. So, make sure you change the port number in the .env file when using Docker.</p>
+
+<h4>Build image and run container</h4>
+<pre>
+    <code>docker-compose up --build</code>
+</pre>
+
+<h4>List images</h4>
+<pre>
+    <code>docker images</code>
+</pre>
+
+<h4>List containers</h4>
+<pre>
+    <code>docker ps</code>
+</pre>
+
+{% endblock content %}
