@@ -1,6 +1,9 @@
 from config.settings.base import *
 from config.settings.utils import get_env_variable
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 ALLOWED_HOSTS = []
 
 # Database
