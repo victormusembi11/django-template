@@ -30,6 +30,9 @@ jobs:
         run: |
           python manage.py migrate
           python manage.py collectstatic --noinput
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
 
       - name: Run Tox
         run: tox -e py
