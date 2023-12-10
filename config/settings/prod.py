@@ -5,7 +5,14 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from config.settings.base import *
 from config.settings.utils import get_env_variable
 
+INSTALLED_APPS += [
+    "storages",
+]
+
 ALLOWED_HOSTS = get_env_variable("ALLOWED_HOSTS").split(",")
+
+# Append WhiteNoise middleware to the top of the middleware list.
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
