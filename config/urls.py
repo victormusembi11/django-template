@@ -22,6 +22,7 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("docs/", include("docs.app.urls")),
+    path("api-auth/", include("rest_framework.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
