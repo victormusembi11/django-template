@@ -16,12 +16,20 @@ DATABASES = {
     }
 }
 
-DB_ENGINE = get_env_variable("DB_ENGINE")
-DB_NAME = get_env_variable("DB_NAME")
-DB_USER = get_env_variable("DB_USER")
-DB_PASS = get_env_variable("DB_PASS")
-DB_HOST = get_env_variable("DB_HOST")
-DB_PORT = get_env_variable("DB_PORT")
+try:
+    DB_ENGINE = get_env_variable("DB_ENGINE")
+    DB_NAME = get_env_variable("DB_NAME")
+    DB_USER = get_env_variable("DB_USER")
+    DB_PASS = get_env_variable("DB_PASS")
+    DB_HOST = get_env_variable("DB_HOST")
+    DB_PORT = get_env_variable("DB_PORT")
+except Exception as e:
+    DB_ENGINE = None
+    DB_NAME = None
+    DB_USER = None
+    DB_PASS = None
+    DB_HOST = None
+    DB_PORT = None
 
 DB_IS_AVAIL = all(
     [
